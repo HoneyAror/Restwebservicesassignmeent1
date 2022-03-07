@@ -1,0 +1,37 @@
+package com.example.Restwebservices;
+
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+@Component
+public class EmployeeDaoService {
+    private static List<EmployeeBean> employee=new ArrayList<>();
+    private static int  usercount=105;
+    static {
+        employee.add(new EmployeeBean(101,"MEENU",25));
+        employee.add(new EmployeeBean(102,"RADHA",24));
+        employee.add(new EmployeeBean(103,"YASH",26));
+        employee.add(new EmployeeBean(104,"SANJAY",25));
+        employee.add(new EmployeeBean(105,"RANU",24));
+        }
+
+    public List<EmployeeBean> findallemp(){
+        return employee;
+    }
+    public EmployeeBean findone(int id){
+        for(EmployeeBean e:employee){
+            if(e.getId()==id){
+                return e;
+            }
+        }
+        return null;
+    }
+    public EmployeeBean SaveEmp(EmployeeBean employeeBean){
+        if(employeeBean.getId()==null){
+            employeeBean.setId(++usercount);
+        }
+        employee.add(employeeBean);
+        return employeeBean;
+    }
+}
